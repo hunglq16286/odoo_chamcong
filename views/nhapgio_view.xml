@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="nhapgio_form_view" model="ir.ui.view">
+            <field name="name">Nhập giờ</field>
+            <field name="model">chamcong.nhapgio</field>
+            <field name="arch" type="xml">
+                <form string="_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="teams" placeholder="Chọn tổ đội" widget="radio"
+                                       options="{'horizontal': false}"/>
+                            </group>
+                            <group>
+                                <field name="nhanviens" placeholder="Chọn tổ đội" widget="radio"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="ngaynhap" widget="date"/>
+                            </group>
+                            <group>
+                                <field name="sogio"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="nhapgio_tree_view" model="ir.ui.view">
+            <field name="name">Nhập giờ</field>
+            <field name="model">chamcong.nhapgio</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="ngaynhap" widget="date"/>
+                    <field name="teams"/>
+                    <field name="nhanviens"/>
+                    <field name="sogio"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="nhapgio_act_window" model="ir.actions.act_window">
+            <field name="name">Nhập giờ</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">chamcong.nhapgio</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Nhập giờ" id="nhapgio_menu" parent="teams_menu_root" action="nhapgio_act_window"/>
+
+    </data>
+</odoo>

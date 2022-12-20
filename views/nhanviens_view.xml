@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="nhanviens_form_view" model="ir.ui.view">
+            <field name="name">Nhân viên</field>
+            <field name="model">chamcong.nhanviens</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="image_1920" widget="image" class="oe_avatar" options="{'preview_image':'image_128'}" />
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Mời nhập tên"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="teams_id" required="1"/>
+                            </group>
+                            <group>
+                                <field name="dod" widget="date" options="{'format': 'dd-MM-yyyy'}"/>
+                            </group>
+                            <group>
+                                <field name="phone"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="gender" widget="radio"/>
+                            </group>
+                            <group>
+                                <field name="married"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="nhanviens_tree_view" model="ir.ui.view">
+            <field name="name">Danh sách nhân viên</field>
+            <field name="model">chamcong.nhanviens</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="teams_id"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="nhanviens_act_window" model="ir.actions.act_window">
+            <field name="name">Nhân viên</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">chamcong.nhanviens</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Nhân viên" id="nhanviens_menu" parent="teams_menu_root" action="nhanviens_act_window"
+                  sequence="2"/>
+
+    </data>
+</odoo>

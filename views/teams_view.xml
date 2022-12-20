@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="teams_form_view" model="ir.ui.view">
+            <field name="name">Tổ đội</field>
+            <field name="model">chamcong.teams</field>
+            <field name="arch" type="xml">
+                <form string="ModelTitle">
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="description"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Nhân viên">
+                                <field name="nhanviens_id"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="teams_tree_view" model="ir.ui.view">
+            <field name="name">Danh sách tổ đội</field>
+            <field name="model">chamcong.teams</field>
+            <field name="arch" type="xml">
+                <tree string="ModelTitle">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="nhanviens_count"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="teams_act_window" model="ir.actions.act_window">
+            <field name="name">Tổ đội</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">chamcong.teams</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
+        <menuitem id="teams_menu_root" name="Chấm công" sequence="1"/>
+
+        <menuitem name="Tổ đội" id="teams_menu" parent="teams_menu_root" action="teams_act_window" sequence="1"/>
+
+    </data>
+</odoo>
