@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="teams_access_category">
+            <field name="name">Teams</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_teams_user" model="res.groups">
+            <field name="name">Team user</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="teams_access_category"/>
+        </record>
+
+        <record id="group_teams_manager" model="res.groups">
+            <field name="name">Teams manager</field>
+            <field name="category_id" ref="teams_access_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_teams_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="rule_group_teams_user" model="ir.rule">
+            <field name="name">rule teams user</field>
+            <field ref="odoo_chamcong.model_chamcong_teams" name="model_id"/>
+            <field name="domain_force">[('create_uid', '=', user.id)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('odoo_chamcong.group_teams_user'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+
+        <record id="rule_group_teams_manager" model="ir.rule">
+            <field name="name">rule teams manager</field>
+            <field ref="odoo_chamcong.model_chamcong_teams" name="model_id"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <!-- You can attach this rule to a specific group, Or make it Global -->
+            <field name="groups" eval="[(4, ref('odoo_chamcong.group_teams_manager'))]"/>
+            <!--<field name="global" eval="1"/> -->
+        </record>
+    </data>
+</odoo>
